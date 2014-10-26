@@ -34,14 +34,15 @@ class FrameworkException extends Exception {
 	}
 	static function assert($boolean, $msg="None given") {
 		if (!$boolean) {
-			throw new FrameworkException(MiscTools::get_calling_class().": Assertion failed! Additional info: ".$msg);
+			throw new FrameworkException(MiscTools::get_calling_class().": Assertion failed! Additional info: ".$msg, self::ASSERTON);
 		}
 	}
 }
 class GeneralPurposeException extends Exception {
-
+  /* For your convenient use, dear developer */
 }
-class PathHandler {
+
+class IncludePathHandler {
 	static function add_include_path ($path) {
 		foreach (func_get_args() AS $path)
 		{
@@ -107,9 +108,9 @@ function __autoload($className) {
 }
 
 function framework_load_paths() { // throws FrameworkException
-	PathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."lib");
-	PathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."internal");
-	PathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."types");
+	IncludePathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."lib");
+	IncludePathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."internal");
+	IncludePathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."types");
 }
 function do_nothing() {
 	return;
