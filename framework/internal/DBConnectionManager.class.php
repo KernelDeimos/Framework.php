@@ -73,7 +73,7 @@ class DBConnectionManager {
 		}
 
 		$config = $this->config;
-		$dbDsn = "sqlite:"+$config->get_property('file');
+		$dbDsn = "sqlite:".$config->get_property('file');
 		$con = new PDO( $dbDsn );
 		$con->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		return $con;
