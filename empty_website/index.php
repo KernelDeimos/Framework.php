@@ -1,6 +1,23 @@
 <?php
 define('DEV_MODE', true);
-include("../framework/framework.php");
+require_once("../framework/framework.php");
+/*
+
+I'm putting this hear, since nobody explains it well enough:
+
+Being able to include a script more than once is silly,
+and you should expect the interpreter to produce an error.
+This is why require_once() is used.
+
+The reason it's silly, is because you must assume a PHP script can
+contain definitions for classes, functions, etc. to prevent errors
+later on.
+
+ ^ Never accept a convention until you know the reason.
+
+*/
+
+
 function mainf() {
 	// Setup the framework's autoloader
 	IncludePathHandler::add_include_path(SITE_PATH."/lib");

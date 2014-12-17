@@ -3,9 +3,15 @@
 
 class Configurator {
 	private $properties;
+	// Constructors . . .
 	function __construct() {
 		$this->properties = array();
 	}
+	static function make_from_arr($array) {
+		$this->properties = $array;
+	}
+
+
 	function set_from_ini_file($file, $section = null) {
 		if ( ($ini_contents = parse_ini_file($file, $section != null))  ===  false ) {
 			throw new Exception("Configurator: Couldn't parse ini file '".$file."'");
