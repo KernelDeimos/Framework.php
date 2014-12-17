@@ -13,12 +13,6 @@ class DBConnectionManager {
 				FrameworkException::CONFIG_INVALID
 				);
 		}
-		if (!$config->has_properties(array('user','pass','host','schema'))) {
-			throw new FrameworkException (
-				"DBConnectionManager is missing database login info.",
-				FrameworkException::CONFIG_MISSING_KEY
-				);
-		}
 		$this->config = $config;
 	}
 	function getError() {
@@ -55,6 +49,14 @@ class DBConnectionManager {
 	}
 
 	function connect_mysql() {
+
+		if (!$this->config->has_properties(array('user','pass','host','schema'))) {
+			throw new FrameworkException (
+				"DBConnectionManager$config missing required parameters for MySQL connection.",
+				FrameworkException::CONFIG_MISSING_KEY
+				);
+		}
+
 		$config = $this->config;
 		$dbDsn = "mysql:host=".$config->get_property('host').";dbname=".$config->get_property('schema');
 		$con = new PDO( $dbDsn, $config->get_property('user'), $config->get_property('pass') );
@@ -62,6 +64,14 @@ class DBConnectionManager {
 		return $con;
 	}
 	function connect_sqlite() {
+
+		if (!$this->config->has_properties(array('file'))) {
+			throw new FrameworkException (
+				"DBConnectionManager$config missing required parameters for SQLite connection.",
+				FrameworkException::CONFIG_MISSING_KEY
+				);
+		}
+
 		$config = $this->config;
 		$dbDsn = "sqlite:"+$config->get_property('file');
 		$con = new PDO( $dbDsn );
