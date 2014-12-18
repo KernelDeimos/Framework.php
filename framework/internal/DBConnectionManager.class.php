@@ -26,13 +26,13 @@ class DBConnectionManager {
 		try {
 			switch ($method) {
 				case 'mysql':
-					$this->connect_mysql();
+					$this->con = $this->connect_mysql();
 					break;
 				case 'sqlite':
-					$this->connect_sqlite();
+					$this->con = $this->connect_sqlite();
 					break;
 				default:
-					$this->connect_mysql();
+					$this->con = $this->connect_mysql();
 					break;
 			}
 			return $this->con;
