@@ -27,7 +27,10 @@ class Configurator {
 		}
 	}
 	function get_property($index) {
-		return $this->properties[$index];
+		echo "<br /><br />";
+		debug_print_backtrace();
+		echo "<br /><br />";
+		return issetor($this->properties[$index]);
 	}
 	function set_property($index, $value) {
 		$this->properties[$index] = $value;
