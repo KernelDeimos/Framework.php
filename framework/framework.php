@@ -1,9 +1,24 @@
 <?php
 
-// IMPORTANT DEFINITIONS
+// === IMPORTANT DEFINITIONS ===
+
+// Framework path
 define ('FRAMEWORK_PATH', realpath(dirname(__FILE__)) );
+// SITE_PATH constant is just a shortcut for the working directory
 define('SITE_PATH',getcwd());
 define('ROOT_PATH',getcwd());
+// The WEB_PATH constant
+/* This took a while to figure out, but at this point
+it's working perfectly. WEB_PATH offers a constant for
+the root of this website as seen by the browser.
+For instance, http://website.com if this is on website.com,
+or http://website.com/sub if this is in a subdirectory.
+*/
+$pattern = '/^'.preg_quote($_SERVER['DOCUMENT_ROOT'],'/').'/';
+$webpath = "http://".$_SERVER['HTTP_HOST'].preg_replace($pattern,'',getcwd());
+define('WEB_PATH',$webpath);
+
+
 if (!defined('DEV_MODE')) {
 	define('DEV_MODE', false);
 }
