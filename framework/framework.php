@@ -79,6 +79,7 @@ function __autoload($className) {
 	$possibleLocations[] = $className . '.class.php';
 	$possibleLocations[] = $className.".class/main.php";
 	$possibleLocations[] = $className."/".$className.".php";
+	$possibleLocations[] = $className.".php";
 	foreach ($possibleLocations as $location) {
 		@include($location);
 		if (class_exists($className)) return;

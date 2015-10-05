@@ -33,3 +33,7 @@ Right now this framework needs a bit of work before anybody can include this in 
   - Templater.class.php (I don't even remember this one)
   - Registry.class.php (Don't think I used this for anything)
 - Program some cool library that uses Framework.php's newer features
+
+### Ideas for the future
+No promises on any of these features, but these are some ideas of what could be implemented in Framework.php
+- A repository of CDNs for including specific versions of Jquery, Bootstrap, etc very quickly.
