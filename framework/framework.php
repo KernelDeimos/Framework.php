@@ -75,15 +75,22 @@ class IncludePathHandler {
 
 // AUTOLOAD
 function __autoload($className) {
+	$classPathAndName = $className;
+	// Get only name of class if there's a namespace
+	$className = explode("\\", $className);
+	$className = $className[count($className)-1];
+	// Generate possible paths for file
 	$possibleLocations = array();
 	$possibleLocations[] = $className . '.class.php';
 	$possibleLocations[] = $className.".class/main.php";
 	$possibleLocations[] = $className."/".$className.".php";
 	$possibleLocations[] = $className.".php";
+	// Attempt to include each file
 	foreach ($possibleLocations as $location) {
 		@include($location);
 		if (class_exists($className)) return;
 	}
+	// Throw error if class still isn't loaded
 	if (!class_exists($className)) {
 		throw new FrameworkException (
 			"Autoload failed; no file or folder with the given classname (".$className.") was readable",

@@ -37,3 +37,5 @@ Right now this framework needs a bit of work before anybody can include this in 
 ### Ideas for the future
 No promises on any of these features, but these are some ideas of what could be implemented in Framework.php
 - A repository of CDNs for including specific versions of Jquery, Bootstrap, etc very quickly.
+- Add support for classes inside namespaces (some of them don't work and I'm not sure why)
+- Compatibility with Composer
