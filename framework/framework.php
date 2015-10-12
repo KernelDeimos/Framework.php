@@ -74,7 +74,7 @@ class IncludePathHandler {
 }
 
 // AUTOLOAD
-function __autoload($className) {
+function framework_autoload($className) {
 	$classPathAndName = $className;
 	// Get only name of class if there's a namespace
 	$className = explode("\\", $className);
@@ -84,7 +84,7 @@ function __autoload($className) {
 	$possibleLocations[] = $className . '.class.php';
 	$possibleLocations[] = $className.".class/main.php";
 	$possibleLocations[] = $className."/".$className.".php";
-	$possibleLocations[] = $className.".php";
+	$possibleLocations[] = $className.".php"; // (as a last resort)
 	// Attempt to include each file
 	foreach ($possibleLocations as $location) {
 		@include($location);
@@ -98,6 +98,9 @@ function __autoload($className) {
 		);
 	}
 }
+spl_autoload_register(function ($className) {
+	framework_autoload($className);
+});
 
 function framework_load_paths() { // throws FrameworkException
 	IncludePathHandler::add_include_path(FRAMEWORK_PATH.DIRECTORY_SEPARATOR."lib");
