@@ -19,11 +19,11 @@ class HtmlShortcuts {
 	static function includeJSPackage($directory) {
 		// Generate path of expected meta file
 		$expectedName = "jspackage.json";
-		$filename = $directory .'/'. $filename;
+		$filename = $directory .'/'. $expectedName;
 
 		// Get data from file and parse
 		$raw_data = file_get_contents($filename);
-		$json = json_decode($raw_data);
+		$json = json_decode($raw_data, true);
 
 		if (
 			$json === null
