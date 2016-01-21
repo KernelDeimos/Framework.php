@@ -16,6 +16,28 @@ class HtmlShortcuts {
 	static function includeJS($src) {
 		print('<script src="'.$src.'"></script>');
 	}
+	static function includeJSPackage($directory) {
+		// Generate path of expected meta file
+		$expectedName = "jspackage.json";
+		$filename = $directory .'/'. $filename;
+
+		// Get data from file and parse
+		$raw_data = file_get_contents($filename);
+		$json = json_decode($raw_data);
+
+		if (
+			$json === null
+			|| ! array_key_exists('scripts', $json)
+			) {
+			echo '<script type="text/javascript">console.log("Failed to load JavaScript Package!")</script>';
+			return;
+		}
+
+		// Include all JavaScript files listed
+		foreach ($json['scripts'] as $filen) {
+			HtmlShortcuts::includeJS($directory .'/'. $filen);
+		}
+	}
 	static function includeJQ() {
 		print('<script src="http://code.jquery.com/jquery-latest.js"></script>');
 	}
